@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyCooking - Simple Recipes for Everyone</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a001a;
+            color: white;
+        }
+        
+        header {
+            background-color: #330033;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ff66ff;
+            text-shadow: 2px 2px 4px #000;
+        }
+        
+        .tagline {
+            font-style: italic;
+            color: #cc99cc;
+        }
+        
+        .chef-hat {
+            font-size: 1.5em;
+            margin: 0 10px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+        
+        .recipe-card {
+            background-color: #4d004d;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .recipe-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .recipe-title {
+            padding: 15px;
+            font-size: 1.2em;
+            text-align: center;
+            background-color: #330033;
+        }
+        
+        .recipe-details {
+            display: none;
+            padding: 20px;
+            background-color: #4d004d;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+        
+        .recipe-details h3 {
+            color: #ff66ff;
+            border-bottom: 1px solid #ff66ff;
+            padding-bottom: 5px;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff66ff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #330033;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: #ff66ff;
+            color: #330033;
+        }
+        
+        .sticker {
+            position: fixed;
+            font-size: 2em;
+            opacity: 0.6;
+            z-index: -1;
+        }
+        
+        .sticker-1 {
+            top: 20%;
+            left: 5%;
+        }
+        
+        .sticker-2 {
+            top: 60%;
+            right: 5%;
+        }
+        
+        .sticker-3 {
+            bottom: 10%;
+            left: 15%;
+        }
+        
+        .calories {
+            background-color: #ff66ff;
+            color: #330033;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        footer {
+            background-color: #330033;
+			text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sticker sticker-1">🍳</div>
+    <div class="sticker sticker-2">👨‍🍳</div>
+    <div class="sticker sticker-3">🍪</div>
+    
+    <header>
+        <div class="logo">Easy<span class="chef-hat">👩‍🍳</span>Cooking</div>
+        <div class="tagline">Simple recipes for everyone!</div>
+    </header>
+    
+    <div class="container">
+        <div class="category-tabs">
+            <button class="category-btn active" data-category="all">All Recipes</button>
+            <button class="category-btn" data-category="fast-food">Fast Food</button>
+            <button class="category-btn" data-category="salad">Salads</button>
+            <button class="category-btn" data-category="dessert">Desserts</button>
+            <button class="category-btn" data-category="drinks">Drinks</button>
+        </div>
+        
+        <div class="recipe-grid">
+            <!-- Fast Food Recipes -->
+            <div class="recipe-card" data-category="fast-food">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" alt="Burger" class="recipe-image">
+                <div class="recipe-title">Classic Burger</div>
+                <div class="recipe-details">
+                    <button class="close-btn">×</button>
+                    <h3>Classic Burger</h3>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        <li>1 lb ground beef</li>
+                        <li>1 tsp salt</li>
+                        <li>1/2 tsp black pepper</li>
+                        <li>4 burger buns</li>
+                        <li>Lettuce, tomato, onion</li>
+                        <li>Cheese slices</li>
+                        <li>Ketchup and mustard</li>
+                    </ul>
+                    <h4>Steps:</h4>
+                    <ol>
+                        <li>Mix beef with salt and pepper, form into 4 patties</li>
+                        <li>Grill for 4-5 minutes per side</li>
+                        <li>Add cheese in last minute of cooking</li>
+                        <li>Toast buns lightly</li>
+                        <li>Assemble with your favorite toppings</li>
+                    </ol>
+                    <div class="calories">Calories: 550 per serving</div>
+                </div>
+            </div>
+            
+            <div class="recipe-card" data-category="fast-food">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591" alt="Pizza" class="recipe-image">
+                <div class="recipe-title">Margherita Pizza</div>
+                <div class="recipe-details">
+                    <button class="close-btn">×</button>
+                    <h3>Margherita Pizza</h3>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        <li>1 pizza dough</li>
+                        <li>1/2 cup tomato sauce</li>
+                        <li>1 1/2 cups mozzarella cheese</li>
+                        <li>Fresh basil leaves</li>
+                        <li>2 tbsp olive oil</li>
+                        <li>Salt to taste</li>
+                    </ul>
+                    <h4>Steps:</h4>
+                    <ol>
+                        <li>Preheat oven to 475°F (245°C)</li>
+                        <li>Roll out dough on floured surface</li>
+                        <li>Spread tomato sauce, leaving border for crust</li>
+                        <li>Add cheese and basil leaves</li>
+                        <li>Drizzle with olive oil</li>
+                        <li>Bake for 10-12 minutes until crust is golden</li>
+                    </ol>
+                    <div class="calories">Calories: 285 per slice</div>
+                </div>
+            </div>
+            
+            <!-- Salad Recipes -->
+            <div class="recipe-card" data-category="salad">
+                <img src="https://images.unsplash.com/photo-1546793665-c74683f339c1" alt="Caesar Salad" class="recipe-image">
+				<div class="recipe-title">Caesar Salad</div>
+                <div class="recipe-details">
+                    <button class="close-btn">×</button>
+                    <h3>Caesar Salad</h3>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        <li>1 romaine lettuce, chopped</li>
+                        <li>1/2 cup grated parmesan</li>
+                        <li>1 cup croutons</li>
+                        <li>1/2 cup Caesar dressing</li>
+                        <li>1 tbsp lemon juice</li>
+                        <li>1 clove garlic, minced</li>
+                        <li>2 anchovy fillets (optional)</li>
+                    </ul>
+                    <h4>Steps:</h4>
+                    <ol>
+                        <li>Wash and dry lettuce thoroughly</li>
+                        <li>In large bowl, combine lettuce, croutons and parmesan</li>
+                        <li>Mix dressing with lemon juice, garlic and anchovies</li>
+                        <li>Toss salad with dressing just before serving</li>
+                    </ol>
+                    <div class="calories">Calories: 320 per serving</div>
+                </div>
+            </div>
+            
+            <div class="recipe-card" data-category="salad">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd" alt="Greek Salad" class="recipe-image">
+                <div class="recipe-title">Greek Salad</div>
+                <div class="recipe-details">
+                    <button class="close-btn">×</button>
+                    <h3>Greek Salad</h3>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        <li>2 cucumbers, diced</li>
+                        <li>4 tomatoes, diced</li>
+                        <li>1 red onion, sliced</li>
+                        <li>1 green bell pepper, diced</li>
+                        <li>1 cup kalamata olives</li>
+                        <li>200g feta cheese, cubed</li>
+                        <li>3 tbsp olive oil</li>
+                        <li>1 tbsp red wine vinegar</li>
+                        <li>1 tsp dried oregano</li>
+                    </ul>
+                    <h4>Steps:</h4>
+                    <ol>
+                        <li>Combine all vegetables in large bowl</li>
+                        <li>Add olives and feta cheese</li>
+                        <li>Whisk together oil, vinegar and oregano</li>
+                        <li>Pour dressing over salad and toss gently</li>
+                        <li>Serve immediately</li>
+                    </ol>
+                    <div class="calories">Calories: 280 per serving</div>
+                </div>
+            </div>
+            
+            <!-- Dessert Recipes -->
+            <div class="recipe-card" data-category="dessert">
+                <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713" alt="Chocolate Chip Cookies" class="recipe-image">
+                <div class="recipe-title">Chocolate Chip Cookies</div>
+                <div class="recipe-details">
+                    <button class="close-btn">×</button>
+                    <h3>Chocolate Chip Cookies</h3>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        <li>2 1/4 cups all-purpose flour</li>
+                        <li>1 tsp baking soda</li>
+                        <li>1 tsp salt</li>
+                        <li>1 cup butter, softened</li>
+                        <li>3/4 cup granulated sugar</li>
+                        <li>3/4 cup packed brown sugar</li>
+                        <li>2 large eggs</li>
+                        <li>2 tsp vanilla extract</li>
+                        <li>2 cups chocolate chips</li>
+                    </ul>
+                    <h4>Steps:</h4>
+                    <ol>
+                        <li>Preheat oven to 375°F (190°C)</li>
+                        <li>Combine flour, baking soda and salt in small bowl</li>
+                        <li>Beat butter and sugars until creamy</li>
+						<li>Add eggs one at a time, then vanilla</li>
+                        <li>Gradually beat in flour mixture</li>
+                        <li>Stir in chocolate chips</li>
+                        <li>Drop by rounded tablespoon onto ungreased baking sheets</li>
+                        <li>Bake for 9-11 minutes until golden brown</li>
+                    </ol>
+                    <div class="calories">Calories: 150 per cookie</div>
+                </div>
+            </div>
+            
+            <div class="recipe-card" data-category="dessert">
+                <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d" alt="Pancakes" class="recipe-image">
+                <div class="recipe-title">Fluffy Pancakes</div>
+                <div class="recipe-details">
+                    <button class="close-btn">×</button>
+                    <h3>Fluffy Pancakes</h3>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        <li>1 1/2 cups all-purpose flour</li>
+                        <li>3 1/2 tsp baking powder</li>
+                        <li>1 tbsp sugar</li>
+                        <li>1/4 tsp salt</li>
+                        <li>1 1/4 cups milk</li>
+                        <li>1 egg</li>
+                        <li>3 tbsp melted butter</li>
+                        <li>1 tsp vanilla extract</li>
+                    </ul>
+                    <h4>Steps:</h4>
+                    <ol>
+                        <li>Sift together dry ingredients</li>
+                        <li>Make a well and add milk, egg, melted butter and vanilla</li>
+                        <li>Mix until smooth</li>
+                        <li>Heat lightly oiled griddle over medium-high heat</li>
+                        <li>Pour batter onto griddle (1/4 cup per pancake)</li>
+                        <li>Cook until bubbles form and edges are dry (2-3 minutes)</li>
+                        <li>Flip and cook until browned on other side</li>
+                    </ol>
+                    <div class="calories">Calories: 230 per serving (3 pancakes)</div>
+                </div>
+            </div>
+            
+            <!-- Drink Recipes -->
+            <div class="recipe-card" data-category="drinks">
+                <img src="https://images.unsplash.com/photo-1554866585-cd94860890b7" alt="Homemade Lemonade" class="recipe-image">
+                <div class="recipe-title">Homemade Lemonade</div>
+                <div class="recipe-details">
+                    <button class="close-btn">×</button>
+                    <h3>Homemade Lemonade</h3>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        <li>1 cup fresh lemon juice (about 6 lemons)</li>
+                        <li>1 cup sugar</li>
+                        <li>6 cups cold water</li>
+                        <li>Lemon slices for garnish</li>
+                        <li>Ice cubes</li>
+                    </ul>
+                    <h4>Steps:</h4>
+                    <ol>
+                        <li>Juice the lemons, straining out seeds</li>
+                        <li>Make simple syrup by heating 1 cup water with sugar until dissolved</li>
+                        <li>Combine lemon juice, simple syrup and remaining water</li>
+                        <li>Chill for at least 1 hour</li>
+                        <li>Serve over ice with lemon slices</li>
+                    </ol>
+                    <div class="calories">Calories: 120 per glass</div>
+                </div>
+            </div>
+            
+            <div class="recipe-card" data-category="drinks">
+                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd" alt="Strawberry Smoothie" class="recipe-image">
+                <div class="recipe-title">Strawberry Smoothie</div>
+                <div class="recipe-details">
+                    <button class="close-btn">×</button>
+                    <h3>Strawberry Smoothie</h3>
+                    <h4>Ingredients:</h4>
+                    <ul>
+					<li>2 cups fresh strawberries</li>
+                        <li>1 banana</li>
+                        <li>1 cup milk (or almond milk)</li>
+                        <li>1/2 cup yogurt</li>
+                        <li>1 tbsp honey (optional)</li>
+                        <li>Ice cubes</li>
+                    </ul>
+                    <h4>Steps:</h4>
+                    <ol>
+                        <li>Wash and hull strawberries</li>
+                        <li>Peel banana and break into chunks</li>
+                        <li>Add all ingredients to blender</li>
+                        <li>Blend until smooth</li>
+                        <li>Add more milk if too thick</li>
+                        <li>Serve immediately</li>
+                    </ol>
+                    <div class="calories">Calories: 180 per serving</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; 2023 EasyCooking | All Rights Reserved
+    </footer>
+    
+    <script>
+        // Show recipe details when card is clicked
+        document.querySelectorAll('.recipe-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't trigger if clicking on close button
+                if (e.target.classList.contains('close-btn')) return;
+                
+                // Hide all other open details first
+                document.querySelectorAll('.recipe-details').forEach(detail => {
+                    detail.style.display = 'none';
+                });
+                
+                // Show clicked card's details
+                this.querySelector('.recipe-details').style.display = 'block';
+            });
+        });
+        
+        // Close button functionality
+        document.querySelectorAll('.close-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent triggering the card click
+                this.parentElement.style.display = 'none';
+            });
+        });
+        
+        // Category filtering
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                
+                // Show/hide recipes based on category
+                document.querySelectorAll('.recipe-card').forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
